@@ -55,6 +55,7 @@ class FileStorage:
             id = key.split('.')
             id = id[1]
             if obj_id == id:
+                self.__objects.pop(key)
                 break
-        self.__objects.pop(key)
+#         self.__objects.pop(key)
         self.save()
