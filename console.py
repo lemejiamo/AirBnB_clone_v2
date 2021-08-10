@@ -24,6 +24,7 @@ class HBNBCommand(cmd.Cmd):
                'Review': Review
               }
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
+
     types = {
              'number_rooms': int, 'number_bathrooms': int,
              'max_guest': int, 'price_by_night': int,
@@ -114,19 +115,19 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        parametros = args.split()
-        clase = parametros[0]
+        parameters = args.split()
+        class_ = parameters[0]
         """ Create an object of any class"""
-        if not parametros:
+        if not parameters:
             print("** class name missing **")
             return
-        elif clase not in HBNBCommand.classes:
+        elif class_ not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[clase]()
+        new_instance = HBNBCommand.classes[class_]()
 
-        for i in range(1, len(parametros)):
-            key = parametros[i].split("=")
+        for i in range(1, len(parameters)):
+            key = parameters[i].split("=")
             name_atributte = key[0]
             value = key[1]
             if value.startswith('"'):
