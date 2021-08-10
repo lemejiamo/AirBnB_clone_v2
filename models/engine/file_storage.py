@@ -32,6 +32,7 @@ class FileStorage:
             json.dump(temp, f)
 
     def delete(self, obj=None):
+        """ Delete object from JSON database """
         if obj:
             obj_id = obj.__dict__['id']
             for key in self.__objects:
