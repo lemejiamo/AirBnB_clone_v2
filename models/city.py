@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """ City Module for HBNB project """
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, Integer, String, DateTime, MetaData, ForeignKey
+from sqlalchemy.orm import relationship, backref
 
 
 class City(BaseModel, Base):
@@ -9,5 +11,5 @@ class City(BaseModel, Base):
 #|---------------------------- Class Attributes ----------------------------|
 
     __tablename__ = 'cities'
-    name = Column(string(128), nulleable=False)
-    state_id = Column(string(60), ForeignKey("states.id"), nullable=False)
+    name = Column(String(128), nulleable=False)
+    state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
