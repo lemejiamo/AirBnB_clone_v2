@@ -2,27 +2,28 @@
 """This module defines a base class for all models in our hbnb clone"""
 import uuid
 from datetime import datetime
-from sqlalchemy import Column, String, DateTime, MetaData
+from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
+
 
 Base = declarative_base()
 
 
 class BaseModel:
     """A base class for all hbnb models"""
-    
+
 #|---------------------------- Class Attributes ----------------------------|
 
-    id = Column(String(60), primary_key=True, nulleable=False)
-    created_at = Column(DateTime, default=datetime.utcnow(), nulleable=False)
-    updated_at = Column(DateTime, default=datetime.utcnow(), nulleable=False)
+    id = Column(String(60), primary_key=True, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
 
-    
+
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
-                  
+
         time = datetime.now()
-        self.id = str(uuid4())
+        self.id = str(uuid.uuid4())
         self.created_at = time
         self.updated_at = time
 
@@ -63,13 +64,13 @@ class BaseModel:
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
-        
+
         if "_sa_instance_state" in dictionary:
             dictionary.pop("_sa_instance_state", None)
-        
+
         return dictionary
 
     def delete(self):
         """ delete the current instance from the storage """
-        
+        from models import storage
         storage.delete(self)
