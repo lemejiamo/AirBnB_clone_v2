@@ -4,12 +4,10 @@ apt update -y
 apt install nginx -y
 mkdir -p /data/web_static/shared/
 mkdir -p /data/web_static/releases/test/
-
 echo "Holberton School" > /data/web_static/releases/test/index.html
 rm -rf /data/web_static/current
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 chown -R ubuntu:ubuntu /data
-
 NAME=$(uname --all | cut -d ' ' -f 2)
 LISTEN=80
 ROOT="/var/www/html"
@@ -18,7 +16,6 @@ HEADER="X-Served-By: $NAME"
 REDIRECT="return 301 https://lemejiamo.tech"
 PAGE_404="/custom_404.html"
 HBNB_STATIC="/data/web_static/current/"
-
 default="server {
 	listen $LISTEN default_server;
 	root $ROOT;
