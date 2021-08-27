@@ -1,4 +1,4 @@
-#1/usr/bin/env bash
+#!/usr/bin/env bash
 # setup web static server
 apt update -y
 apt install nginx -y
