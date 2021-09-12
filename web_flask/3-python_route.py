@@ -34,11 +34,13 @@ def c_is_fun(string_p):
 @app.route('/python')
 @app.route('/python/')
 def default_phyton():
+    """ default_phyton """
     return ("Python is cool")
 
 
 @app.route('/python/<text>')
 def python_route(text):
+    """ python Route """
     string = c_is_fun(text)
     print(string)
     return ("Python {}".format(string))
@@ -46,6 +48,7 @@ def python_route(text):
 
 @app.route('/number/<n>')
 def number_route(n):
+    """ number route """
     if '.' not in n:
         return n + " " + "is a number"
     pass
