@@ -2,22 +2,23 @@
 """ Module to mange flask Server"""
 
 
-from re import split
-from flask  import Flask, render_template
-import subprocess
+from flask import Flask
 
 
-app =  Flask(__name__)
+app = Flask(__name__)
+
 
 @app.route('/', strict_slashes=False)
 def index():
     """ route to root """
     return 'Hello HBNB!'
 
+
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
     """" route to HBNB"""
     return 'HBNB'
+
 
 @app.route('/c/<string_p>')
 def c_is_fun(string_p):
@@ -29,5 +30,5 @@ def c_is_fun(string_p):
     return new_string[1:]
 
 
-if __name__== "__main__":
+if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
