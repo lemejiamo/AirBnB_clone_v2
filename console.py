@@ -54,7 +54,8 @@ class HBNBCommand(cmd.Cmd):
 
         key = str(args[0]) + '.' + args[1]
         # If the key is valid Return key and args
-        if key in storage.objects():
+        objects = storage.objects()
+        if key in objects:
             return self._SUCCESS_, key, args
 
         # If the instance of the class name doesn’t exist
