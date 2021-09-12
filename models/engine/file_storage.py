@@ -7,6 +7,17 @@ class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
     __objects = {}
+ 
+    @property
+    def objects(self):
+        """
+            Getter for objects
+        """
+
+        return (self.__objects)
+ 
+    def close(self):
+        reload()
 
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
@@ -14,7 +25,7 @@ class FileStorage:
             cls_dict = {}
             for key, value in self.__objects.items():
                 if value.__class__ == cls:
-                    cls_dict[key] = value
+                   cls_dict[key] = value
             return cls_dict
         return FileStorage.__objects
 
