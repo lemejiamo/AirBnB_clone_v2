@@ -104,28 +104,33 @@ class HBNBCommand(cmd.Cmd):
             Attributes
             name_class - the name of the class to create
         """
+        if not arg:
+            print("** class name missing **")
+            return None
+        else:
+            args = arg.split()
+            if args[0] not in self.__classes_list:
+                print("** class doesn't exist **")
 
-        args = arg.split()
-        name_class = args[0]
-        if name_class in self.__classes_list:
+
+
+        if args[0] in self.__classes_list:
+            name_class = args[0]
             args.pop(0)
             attributes = {}
             for _arg in args:
                 attribute = _arg.split('=')
-                key = attribute[0]
-                value = attribute[1][1:-1]
-                attributes[key] = value
-
+                if len(attribute) == 2:
+                    key = attribute[0]
+                    value = attribute[1][1:-1]
+                    attributes[key] = value
+                else:
+                    pass
             new_model = eval(name_class)(**attributes)
             new_model.save()
             print(new_model.id)
             storage.reload()
 
-        elif name_class == '':
-            print("** class name missing **")
-
-        else:
-            print("** class doesn't exist **")
 
 
     def do_show(self, input):
