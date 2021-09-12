@@ -3,6 +3,7 @@
     Console Module to manage AirBNB clone project to Holberton School
 """
 import cmd
+import sys
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -112,8 +113,6 @@ class HBNBCommand(cmd.Cmd):
             if args[0] not in self.__classes_list:
                 print("** class doesn't exist **")
 
-
-
         if args[0] in self.__classes_list:
             name_class = args[0]
             args.pop(0)
@@ -122,7 +121,10 @@ class HBNBCommand(cmd.Cmd):
                 attribute = _arg.split('=')
                 if len(attribute) == 2:
                     key = attribute[0]
-                    value = attribute[1][1:-1]
+                    value = attribute[1]
+                    if value.startswith('"'):
+                        value = value[1:-1]
+                    value = value.replace('_', ' ')
                     attributes[key] = value
                 else:
                     pass
@@ -130,8 +132,6 @@ class HBNBCommand(cmd.Cmd):
             new_model.save()
             print(new_model.id)
             storage.reload()
-
-
 
     def do_show(self, input):
         """
@@ -172,8 +172,8 @@ class HBNBCommand(cmd.Cmd):
         def print_instances(list):
             instance_dict = storage.all()
             for key in list:
-                instance_dict = storage.objects.get(key)
-                _object = eval(instance_dict.get('__class__'))(**instance_dict)
+                _object = storage.objects.get(key)
+                # _object = eval(instance_dict('__class__'))(**instance_dict)
                 instances_list.append(_object.__str__())
             print(instances_list)
 
