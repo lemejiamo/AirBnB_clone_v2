@@ -1,11 +1,20 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
-from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String
+
+from models.base_model import BaseModel
+from models import storage
+from models.city import City
 
 
-class State(BaseModel, Base):
+class State(BaseModel):
     """ State class """
-    __tablename__ = 'states'
 
-    name = Column(String(128), nullable=False)
+    @property
+    def cities(self):
+        all_cities = storage.all(City)
+        city_list = []
+        for city in all_cities.values():
+            if city.state_id == self.id:
+                city_list.append(city)
+
+        return city_list
